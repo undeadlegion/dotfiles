@@ -35,7 +35,28 @@ function ask_for_sudo() {
 }
 
 function install_xcode_command_line_tools() {
-    info "Installing Xcode command line tools"
+	info "Installing Xcode command line tools"
+	os=$(sw_vers -productVersion | awk -F. '{print $1 "." $2}')
+	if softwareupdate --history | grep --silent "Command Line Tools.*${os}"; then
+		success "Xcode command line tools already exists"
+	else
+	    IN_PROGRESS=/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+	    touch ${IN_PROGRESS}
+	    product=$(softwareupdate --list | awk "/\* Command Line.*${os}/ { sub(/^   \* /, \"\"); print }")
+
+	    if softwareupdate --verbose --install "${product}"; then
+            success "Xcode command line tools installation succeeded"
+            rm ${IN_PROGRESS}
+        else
+            error "Xcode command line tools installation failed"
+            rm ${IN_PROGRESS}
+            exit 1
+	    fi    
+	fi
+}
+
+function install_xcode_command_line_tools_2() {
+    
     if softwareupdate --history | grep --silent "Command Line Tools"; then
         success "Xcode command line tools already exists"
     else
