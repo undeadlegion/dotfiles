@@ -4,8 +4,8 @@ main() {
     ask_for_sudo
     install_xcode_command_line_tools # to get "git", needed for clone_dotfiles_repo
     clone_dotfiles_repo
-    # install_homebrew
-    # install_packages_with_brewfile
+    install_homebrew
+    install_packages_with_brewfile
     # change_shell_to_fish
     # install_oh_my_fish
     # install_pip_packages
@@ -35,25 +35,25 @@ function ask_for_sudo() {
 }
 
 function install_xcode_command_line_tools() {
-	info "Installing Xcode command line tools"
-	os=$(sw_vers -productVersion | awk -F. '{print $1 "." $2}')
-	IN_PROGRESS=/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    info "Installing Xcode command line tools"
+    os=$(sw_vers -productVersion | awk -F. '{print $1 "." $2}')
+    IN_PROGRESS=/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 
-	if softwareupdate --history | grep --silent "Command Line Tools"; then
-		success "Xcode command line tools already exists"
-	else
-	    touch ${IN_PROGRESS}
-	    product=$(softwareupdate --list | grep "\*.*Command Line" | tail -n 1 | sed 's/^.*: //')
-	    softwareupdate --install "${product}"
-		rm ${IN_PROGRESS}
+    if softwareupdate --history | grep --silent "Command Line Tools"; then
+        success "Xcode command line tools already exists"
+    else
+        touch ${IN_PROGRESS}
+        product=$(softwareupdate --list | grep "\*.*Command Line" | tail -n 1 | sed 's/^.*: //')
+        softwareupdate --install "${product}"
+        rm ${IN_PROGRESS}
 
-	    if softwareupdate --history | grep --silent "Command Line Tools"; then
-			success "Xcode command line tools successfully installed"
-		else
-			error "Xcode command line tools installation failed"
-			exit 1
-		fi
-	fi
+        if softwareupdate --history | grep --silent "Command Line Tools"; then
+             success "Xcode command line tools successfully installed"
+        else
+            error "Xcode command line tools installation failed"
+            exit 1
+        fi
+    fi
 }
 
 function install_xcode_command_line_tools_2() {
@@ -78,8 +78,8 @@ function install_homebrew() {
     if hash brew 2>/dev/null; then
         success "Homebrew already exists"
     else
-        url=https://raw.githubusercontent.com/Homebrew/install/master/install
-        if yes | /usr/bin/ruby -e "$(curl -fsSL ${url})"; then
+        url=https://raw.githubusercontent.com/Homebrew/install/master/install.sh)
+        if yes | /bin/bash -c "$(curl -fsSL ${url})"; then
             success "Homebrew installation succeeded"
         else
             error "Homebrew installation failed"
