@@ -57,7 +57,6 @@ function install_xcode_command_line_tools() {
 }
 
 function install_xcode_command_line_tools_2() {
-    
     if softwareupdate --history | grep --silent "Command Line Tools"; then
         success "Xcode command line tools already exists"
     else
@@ -73,12 +72,24 @@ function install_xcode_command_line_tools_2() {
     fi
 }
 
+function update_homebrew() {
+    info "Updating Homebrew"
+    brew update
+    brew upgrade
+    success "Homebrew successfully updated"
+}
+
+function update_system() {
+    info "Updating System"
+}
+
 function install_homebrew() {
     info "Installing Homebrew"
     if hash brew 2>/dev/null; then
         success "Homebrew already exists"
+        update_homebrew
     else
-        url=https://raw.githubusercontent.com/Homebrew/install/master/install.sh)
+        url=https://raw.githubusercontent.com/Homebrew/install/master/install.sh
         if yes | /bin/bash -c "$(curl -fsSL ${url})"; then
             success "Homebrew installation succeeded"
         else
