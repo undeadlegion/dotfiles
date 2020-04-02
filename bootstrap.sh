@@ -4,6 +4,7 @@ main() {
     ask_for_sudo
     install_xcode_command_line_tools # to get "git", needed for clone_dotfiles_repo
     clone_dotfiles_repo
+    setup_gitconfig
     install_homebrew
     install_packages_with_brewfile
     # change_shell_to_fish
@@ -154,6 +155,24 @@ function clone_dotfiles_repo() {
             exit 1
         fi
     fi
+}
+
+function setup_gitconfig() {
+  if ! [ -f git/gitconfig.local.symlink ]
+  then
+    info 'Set up git config'
+
+    git_credential='osxkeychain'
+
+    substep 'What is your github author name?'
+    read -e git_authorname
+    substep 'What is your github author email?'
+    read -e git_authoremail
+
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+
+    success 'Git config set up successfully'
+  fi
 }
 
 function pull_latest() {
