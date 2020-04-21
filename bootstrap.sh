@@ -6,8 +6,11 @@ main() {
     clone_dotfiles_repo
     setup_gitconfig
     install_homebrew
+    update_homebrew
     install_packages_with_brewfile
-    install_dotfiles
+    symlink_dotfiles
+    install_scripts
+    update_system
     # update_hosts_file
     # setup_macOS_defaults
     # update_login_items
@@ -76,13 +79,14 @@ function update_homebrew() {
 
 function update_system() {
     info "Updating System"
+    softwareupdate -i -a
+    success "System successfully updated"
 }
 
 function install_homebrew() {
     info "Installing Homebrew"
     if hash brew 2>/dev/null; then
         success "Homebrew already exists"
-        update_homebrew
     else
         url=https://raw.githubusercontent.com/Homebrew/install/master/install.sh
         if yes | /bin/bash -c "$(curl -fsSL ${url})"; then
@@ -280,7 +284,7 @@ function link_file () {
     fi
 }
 
-function install_dotfiles () {
+function symlink_dotfiles () {
     info 'Installing Dotfiles'
 
     local overwrite_all=false backup_all=false skip_all=false
@@ -289,6 +293,11 @@ function install_dotfiles () {
         dst="$HOME/.$(basename "${src%.*}")"
         link_file "$src" "$dst"
     done
+}
+
+function install_scripts () {
+    # find the installers and run them iteratively
+    find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 }
 
 function update_hosts_file() {
