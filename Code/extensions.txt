@@ -1,0 +1,5 @@
+CoenraadS.bracket-pair-colorizer-2
+Dart-Code.dart-code
+Dart-Code.flutter
+dbaeumer.vscode-eslint
+msjsdiag.debugger-for-chrome

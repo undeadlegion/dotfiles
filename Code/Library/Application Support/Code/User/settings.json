@@ -1,0 +1,10 @@
+{
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.focusRecentEditorAfterClose": false,
+    "extensions.ignoreRecommendations": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "dart.previewFlutterUiGuides": true,
+    "editor.formatOnSave": true,
+    "workbench.list.automaticKeyboardNavigation": false
+}
