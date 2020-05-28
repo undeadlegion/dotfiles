@@ -1,3 +1,5 @@
+brew "mackup"
+
 #brew "ack"
 #brew "awscli"
 #brew "cmake" # for YouCompleteMe vim plugin
