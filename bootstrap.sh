@@ -158,18 +158,18 @@ function clone_dotfiles_repo() {
 function setup_gitconfig() {
   if ! [ -f git/gitconfig.local.symlink ]
   then
-    info 'Set up git config'
+    info "Set up git config"
 
     git_credential='osxkeychain'
 
-    substep 'What is your github author name?'
+    substep "What is your github author name?"
     read -e git_authorname
-    substep 'What is your github author email?'
+    substep "What is your github author email?"
     read -e git_authoremail
 
     sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
 
-    success 'Git config set up successfully'
+    success "Git config set up successfully"
   fi
 }
 
@@ -285,7 +285,7 @@ function link_file () {
 }
 
 function symlink_dotfiles () {
-    info 'Installing Dotfiles'
+    info "Installing dotfiles"
 
     local overwrite_all=false backup_all=false skip_all=false
 
@@ -296,6 +296,7 @@ function symlink_dotfiles () {
 }
 
 function install_scripts () {
+    info "Running install scripts"
     # find the installers and run them iteratively
     find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
 }
@@ -344,7 +345,7 @@ function update_login_items() {
     info "Updating login items"
 
     if osascript ${DOTFILES_REPO}/macOS/login_items.applescript &> /dev/null; then
-        success "Login items updated successfully "
+        success "Login items updated successfully"
     else
         error "Login items update failed"
         exit 1
