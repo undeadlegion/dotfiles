@@ -1,6 +1,7 @@
 [storage]
 engine = icloud
+directory = Sync/Mackup
 
 [applications_to_sync]
 iTerm2
-Visual Studio Code
+vscode
