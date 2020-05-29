@@ -1,3 +1,4 @@
+cask "android-studio"
 cask "iterm2"
 cask "toggl"
 cask "visual-studio-code"
