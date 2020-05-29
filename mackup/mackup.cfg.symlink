@@ -5,3 +5,4 @@ directory = Sync/Mackup
 [applications_to_sync]
 iTerm2
 vscode
+zsh

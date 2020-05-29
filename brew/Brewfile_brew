@@ -1,4 +1,5 @@
 brew "mackup"
+brew "zsh"
 
 #brew "ack"
 #brew "awscli"
