@@ -1,8 +1,7 @@
+brew "git"
 brew "mackup"
 brew "mas"
 brew "zsh"
-
-#brew "git"
 
 #brew "ack"
 #brew "awscli"
