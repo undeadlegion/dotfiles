@@ -1,5 +1,8 @@
 brew "mackup"
+brew "mas"
 brew "zsh"
+
+#brew "git"
 
 #brew "ack"
 #brew "awscli"
@@ -10,13 +13,11 @@ brew "zsh"
 #brew "fish"
 #brew "flake8" # for linting Python files
 #brew "gifsicle" # for gif_compress fish function
-#brew "git"
 #brew "git-open"
 #brew "htop"
 #brew "httpie"
 #brew "imagemagick"
 #brew "jq"
-#brew "mas"
 #brew "mongodb-community"
 #brew "node"
 #brew "p7zip"
